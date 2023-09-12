@@ -31,6 +31,7 @@ const CommentArea = (props) => {
       } else {
         console.log("error");
         setIsLoading(false);
+        setIsError(true);
       }
     } catch (error) {
       console.log(error);
@@ -39,7 +40,7 @@ const CommentArea = (props) => {
     }
   };
   useEffect(() => {
-    fetchComments();
+    if (props.asin !== "") fetchComments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.asin]);
 

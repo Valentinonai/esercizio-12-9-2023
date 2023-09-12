@@ -14,7 +14,7 @@ const CommentArea = (props) => {
   const fetchComments = async () => {
     setIsFirstLoad(true);
     try {
-      let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
+      let response = await fetch("https://striveschool-api.herokuapp.com/api/books/" + props.asin + "/comments/", {
         headers: {
           "Content-Type": "application/json",
           Authorization:
@@ -23,16 +23,14 @@ const CommentArea = (props) => {
       });
       if (response.ok) {
         let comments = await response.json();
-        const x = comments.filter((elem) => elem.elementId === props.asin);
 
-        setComments(x);
+        setComments(comments);
         setIsLoading(false);
         setIsError(false);
         setIsFirstLoad(false);
       } else {
         console.log("error");
         setIsLoading(false);
-        setIsError(true);
       }
     } catch (error) {
       console.log(error);
